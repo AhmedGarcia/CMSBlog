@@ -1,0 +1,15 @@
+<h2>Your Posts</h2>
+{{#each posts}}
+  <div class="post">
+    <h3>{{this.title}}</h3>
+    <p>{{format_date this.createdAt}}</p>
+    <button data-id="{{this.id}}">Edit</button>
+    <button data-id="{{this.id}}">Delete</button>
+  </div>
+{{/each}}
+
+<form class="new-post-form">
+  <input type="text" id="post-title" placeholder="Post Title">
+  <textarea id="post-content" placeholder="Post Content"></textarea>
+  <button type="submit">Create New Post</button>
+</form>
