@@ -1,7 +1,2 @@
-{{#each posts}}
-  <div class="post">
-    <h2><a href="/post/{{this.id}}">{{this.title}}</a></h2>
-    <p>{{format_date this.createdAt}}</p>
-    <p>{{this.content}}</p>
-  </div>
-{{/each}}
+<h2>All Blog Posts</h2>
+{{> post-list posts=posts }} <!-- Use the post-list partial to display all posts -->
