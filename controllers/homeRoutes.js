@@ -61,4 +61,14 @@ router.get('/login', (req, res) => {
     res.render('login', { js: 'login' });
 });
 
+// Route to render the signup page
+router.get('/signup', (req,res) => {
+    if (req.session.logged_in) {
+        req.redirect('/dashboard');
+        return;
+    }
+
+    res.render('signup', { js: 'signup'});
+})
+
 module.exports = router;
