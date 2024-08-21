@@ -4,7 +4,7 @@ const Comment = require('./Comment');
 
 // Assosiations between the models
 
-User.ahasMany(Post, {
+User.hasMany(Post, {
     foreignKey: 'user_id',
 });
 
