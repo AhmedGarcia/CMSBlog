@@ -4,7 +4,7 @@ const loginFormHandler = async (event) => {
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
 
-    if (username && password) {
+    if (username && password) { // Ensure both username and password are provided
     const response = await fetch('/api/users/login', {
         method: 'POST',
         body: JSON.stringify({ username,password }),
@@ -12,7 +12,7 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard');
+        document.location.replace('/dashboard'); // Redirect to the dashboard if login is successful
     } else {
         alert('Failed to log in.');
     }
@@ -21,4 +21,4 @@ const loginFormHandler = async (event) => {
 
 document
   .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+  .addEventListener('submit', loginFormHandler)

@@ -1,15 +1,14 @@
 <h2>Your Posts</h2>
-{{#each posts}}
-  <div class="post">
-    <h3>{{this.title}}</h3>
-    <p>{{format_date this.createdAt}}</p>
-    <button data-id="{{this.id}}">Edit</button>
-    <button data-id="{{this.id}}">Delete</button>
-  </div>
-{{/each}}
+{{#if posts.length}} <!-- Check if there are posts to display -->
+    {{#each posts}} <!-- Loop through each post and use the dashboard-post partial -->
+        {{> dashboard-post }}
+    {{/each}}
+{{else}} <!-- If there are no posts, display a message -->
+    <p>No posts yet.</p>
+{{/if}}
 
 <form class="new-post-form">
-  <input type="text" id="post-title" placeholder="Post Title">
-  <textarea id="post-content" placeholder="Post Content"></textarea>
-  <button type="submit">Create New Post</button>
+    <input type="text" id="post-title" placeholder="Post Title"> <!-- Input for the post title -->
+    <textarea id="post-content" placeholder="Post Content"></textarea> <!-- Textarea for the post content -->
+    <button type="submit">Create New Post</button> <!-- Submit button for creating a new post -->
 </form>
