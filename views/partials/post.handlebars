@@ -1,6 +1,6 @@
 {{!-- This partial displays an individual post. --}}
 <div class="post">
-    <h2><a href="/post/{{id}}">{{title}}</a></h2>
-    <p>By: {{user.username}} on {{format_date createdAt}}</p>
-    <p>{{content}}</p>
+    <h2><a href="/post/{{id}}">{{title}}</a></h2> <!-- Link to the full post view -->
+    <p>By: {{user.username}} on {{format_date createdAt}}</p> <!-- Show the post's author and date -->
+    <p>{{content}}</p> <!-- Display a snippet or the full content of the post -->
 </div>

@@ -1,0 +1,21 @@
+<div class="post">
+    <h2>{{title}}</h2><!-- Display the post title -->
+    <p>{{content}}</p><!-- Display the full post content -->
+    <p>By: {{user.username}} on {{format_date createdAt}}</p><!-- Show the post's author and date -->
+</div>
+
+<h3>Comments</h3>
+{{#if comments.length}} <!-- Check if there are comments to display -->
+    {{ comment-list comments=comments }} <!-- Use the comment-list partial to display comments -->
+{{else}}
+    <p>No comments yet.</p>
+{{/if}}
+
+{{#if logged_in}}<!-- If the user is logged in, show the comment form -->
+<form class="comment-form">
+    <textarea id="comment-content" placeholder="Add a comment"></textarea> <!-- Textarea for the comment -->
+    <button type="submit">Submit</button>
+</form>
+{{else}} <!-- If the user is not logged in, prompt them to log in -->
+<p>You must be logged in to comment</p>
+{{/if}}

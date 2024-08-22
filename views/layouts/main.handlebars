@@ -13,7 +13,7 @@
             <a href="/">Home</a>
             {{#if logged_in}} <!-- If the user is logged in, show Dashboard and Logout options -->
             <a href="/dashboard">Dashboard</a>
-            <button id="logout">Logout</button>
+            <button id="logout">Logout</button><!-- Logout Button -->
             {{else}} <!-- If the user is not logged in, show Login and Signup options -->
             <a href="/login">Login</a>
             <a href="/signup">Signup</a>
@@ -31,6 +31,10 @@
 
     {{#if js}} <!-- If a JavaScript file is specified, include it -->
     <script src="/js/{{js}}.js"></script>
+    {{/if}}
+
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script> <!-- Load logout.js if the user is logged in -->
     {{/if}}
 </body>
 </html>
