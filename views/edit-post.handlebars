@@ -1,0 +1,6 @@
+<form class="edit-post-form" data-id="{{post.id}}">
+    <input type="text" id="post-title" value="{{post.title}}" required> <!-- Input for the post title -->
+    <textarea id="post-content" required>{{post.content}}</textarea> <!-- Textarea for the post content -->
+    <button type="submit">Save Changes</button> <!-- Submit button for saving the changes -->
+    <button type="button" class="delete-post-btn" data-id="{{post.id}}">Delete Post</button> <!-- Delete button -->
+</form>

@@ -1,4 +1,4 @@
-<div class="post">
+{{!-- <div class="post">
     <h2>{{title}}</h2><!-- Display the post title -->
     <p>{{content}}</p><!-- Display the full post content -->
     <p>By: {{user.username}} on {{format_date createdAt}}</p><!-- Show the post's author and date -->
@@ -18,4 +18,21 @@
 </form>
 {{else}} <!-- If the user is not logged in, prompt them to log in -->
 <p>You must be logged in to comment</p>
+{{/if}} --}}
+
+<!-- views/post.handlebars -->
+<h2>{{title}}</h2>
+<p>{{content}}</p>
+
+<h3>Comments</h3>
+{{#each comments}}
+  <p>{{this.content}} - by {{this.user.username}} on {{this.createdAt}}</p>
+{{/each}}
+
+{{#if logged_in}}
+<form class="comment-form">
+  <textarea id="comment-content" rows="3" placeholder="Add a comment..."></textarea>
+  <input type="hidden" id="post-id" value="{{id}}">
+  <button type="submit">Submit Comment</button>
+</form>
 {{/if}}
