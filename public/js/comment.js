@@ -1,49 +1,99 @@
-// // Handles adding a new comment to a post
 // const commentFormHandler = async (event) => {
 //     event.preventDefault();
 
-//     const content = documet.querySlector('#comment-content').vaule.trim();
-//     const post_id = window.location.toString().split('/').pop(); // converts the current URL of the browser window into a string. The split method splits this URL string into an array of substrings, using / as the delimiter and pop removes and returns the last element of the array(an ID).
+//     const content = document.querySelector('textarea[name="comment-body"]').value.trim();
+//     const post_id = window.location.toString().split('/').pop();
 
-//     if (content) { // Ensure that the comment content is provided
-//         const response = await fetch(`/api/comments`, {
+//     if (content) {
+//         const response = await fetch('/api/comments', {
 //             method: 'POST',
-//             body: JSON.stringify({ content, post_id}),
+//             body: JSON.stringify({ content, post_id }),
 //             headers: {
 //                 'Content-Type': 'application/json',
 //             },
 //         });
 
 //         if (response.ok) {
-//             document.location.reload(); // Reloads the page to display the new comment
+//             document.location.reload();
 //         } else {
-//             alert('Failed to add comment.');
+//             alert('Failed to add comment');
 //         }
 //     }
 // };
 
 // document
-//   .querySlector('.comment-form')
-//   .addEventListener('submit', commentFormHandler);
+//     .querySelector('.comment-form')
+//     .addEventListener('submit', commentFormHandler);
 
+// document.querySelector('.comment-form').addEventListener('submit', async (event) => {
+//     event.preventDefault(); // Prevent the default form submission behavior
 
-document.querySelector('.comment-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
-  
-    const content = document.querySelector('#comment-content').value.trim();
-    const post_id = document.querySelector('#post-id').value;
-  
-    if (content) {
-      const response = await fetch('/api/comments', {
-        method: 'POST',
-        body: JSON.stringify({ content, post_id }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (response.ok) {
-        document.location.reload(); // Reload the page to show the new comment
-      } else {
-        alert('Failed to add comment');
-      }
+//     const content = document.querySelector('#comment-content').value.trim();
+//     const post_id = document.querySelector('#post-id').value; // Assuming there's a hidden input with the post_id
+
+//     if (content) {
+//         try {
+//             const response = await fetch('/api/comments', {
+//                 method: 'POST',
+//                 body: JSON.stringify({ content, post_id }),
+//                 headers: { 'Content-Type': 'application/json' },
+//             });
+
+//             if (response.ok) {
+//                 window.location.reload(); // Reloads the page to show the updated comment list
+                // const comment = await response.json();
+                // // Dynamically add the comment to the page
+                // const commentSection = document.querySelector('#comments-section');
+                // const newComment = document.createElement('div');
+                // newComment.classList.add('comment');
+                // newComment.innerHTML = `
+                //     <p>${comment.content}</p>
+                //     <p>By: ${comment.user.username} on ${new Date(comment.createdAt).toLocaleString()}</p>
+                // `;
+                // commentSection.appendChild(newComment);
+                // document.querySelector('#comment-content').value = ''; // Clear the textarea
+//             } else {
+//                 alert('Failed to post comment');
+//             }
+//         } catch (error) {
+//             console.error('Error:', error);
+//         }
+//     } else {
+//         alert('Please write a comment before submitting');
+//     }
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const commentForm = document.querySelector('.comment-form');
+
+    if (commentForm) {
+        commentForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            const content = document.querySelector('#comment-content').value.trim();
+            const post_id = document.querySelector('#post-id').value; // Assuming there's a hidden input with the post_id
+
+            if (content) {
+                try {
+                    const response = await fetch('/api/comments', {
+                        method: 'POST',
+                        body: JSON.stringify({ content, post_id }),
+                        headers: { 'Content-Type': 'application/json' },
+                    });
+
+                    if (response.ok) {
+                        window.location.reload(); // Reloads the page to show the updated comment list
+                    } else {
+                        alert('Failed to post comment');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            } else {
+                alert('Please write a comment before submitting');
+            }
+        });
     }
-  });
+});
+
+

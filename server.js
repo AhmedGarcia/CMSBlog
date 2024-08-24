@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const routes = require('./controllers');
+const apiRoutes = require('./controllers/api');
 const sequelize = require('./config/connection');
 const helpers = require('./utils/helpers');
 
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
+app.use('/api', apiRoutes);
 
 //Syncs the database and starts the server
 sequelize.sync({ force: false }).then(() => {

@@ -3,17 +3,79 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Route to create a new comment on a post
+// router.post('/', withAuth, async (req, res) => {
+//     try {
+//         const newComment = await Comment.create({
+//             ...req.body,
+//             user_id: req.session.user_id,
+//         });
+
+//         res.status(200).json(newComment);
+//     } catch (err) {
+//         res.status(400).json(err);
+//     }
+// });
+
+// module.exports = router;
+
+
+// router.post('/', withAuth, async (req, res) => {
+//     try {
+//       const newComment = await Comment.create({
+//         content: req.body.content,
+//         post_id: req.body.post_id,
+//         user_id: req.session.user_id,
+//       });
+  
+//       res.status(200).json(newComment);
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
+
 router.post('/', withAuth, async (req, res) => {
     try {
+        console.log('Request Body:', req.body); // Debugging line
+
+        if (!req.body.content || !req.body.post_id) {
+            return res.status(400).json({ error: "Content and post_id are required" });
+        }
+
         const newComment = await Comment.create({
-            ...req.body,
+            content: req.body.content,
+            post_id: req.body.post_id, 
             user_id: req.session.user_id,
         });
 
-        res.status(200).json(newComment);
+        res.redirect(`/post/${req.body.post_id}`);
     } catch (err) {
-        res.status(400).json(err);
+        console.error(err); // Log the full error for debugging
+        res.status(500).json(err);
     }
 });
 
-module.exports = router;
+
+  // Route to handle creating a new comment
+//   router.post('/comments', withAuth, async (req, res) => {
+//     console.log('POST request to /api/comments');
+//     console.log('Request body:', req.body);
+  
+//     try {
+//       const newComment = await Comment.create({
+//         content: req.body.content,
+//         post_id: req.body.post_id,
+//         user_id: req.session.user_id,
+//       });
+  
+//       console.log('New comment created:', newComment);
+//       res.status(200).json(newComment);
+//     } catch (err) {
+//       console.error('Error creating comment:', err);
+//       res.status(500).json(err);
+//     }
+//   });
+  
+ 
+  
+  module.exports = router;
+

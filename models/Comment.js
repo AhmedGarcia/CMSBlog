@@ -21,6 +21,7 @@ Comment.init(
                 model: 'user',
                 key: 'id',
             },
+            onDelete: 'CASCADE',
         },
         post_id: {
             type: DataTypes.INTEGER,
@@ -28,6 +29,7 @@ Comment.init(
                 model: 'post',
                 key: 'id',
             },
+            onDelete: 'CASCADE',
 
         },
     },
@@ -40,5 +42,6 @@ Comment.init(
 
     
 );
+
 
 module.exports = Comment;

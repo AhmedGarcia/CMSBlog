@@ -8,7 +8,7 @@ Post.init(
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true, 
+            primaryKey: true,
             autoIncrement: true,
         },
         title: {
@@ -23,12 +23,13 @@ Post.init(
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
-                key:'id',
+                key: 'id',
             },
+            onDelete: 'CASCADE',
         },
     },
     {
-        sequelize, 
+        sequelize,
         freezeTableName: true,
         underscored: true,
         modelName: 'post',
@@ -36,3 +37,4 @@ Post.init(
 );
 
 module.exports = Post;
+
