@@ -47,7 +47,7 @@ router.get('/post/:id', async (req, res) => {
         }
 
         const post = postData.get({ plain: true });
-        
+
         console.log(post); 
         res.render('post', {
             ...post,
@@ -77,5 +77,13 @@ router.get('/signup', (req,res) => {
 
     res.render('signup', { js: 'signup'});
 })
+
+// Existing route handlers...
+
+router.get('/about', (req, res) => {
+    res.render('about', { 
+        logged_in: req.session.logged_in 
+    });
+});
 
 module.exports = router;
