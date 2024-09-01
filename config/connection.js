@@ -1,8 +1,10 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
 
-const sequelize = process.env.DATABASE_URL
-    ? new Sequelize(process.env.DATABASE_URL, {
+let sequelize;
+
+if (process.env.NODE_ENV === 'production') {
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
         dialect: 'postgres',
         protocol: 'postgres',
         dialectOptions: {
@@ -11,8 +13,9 @@ const sequelize = process.env.DATABASE_URL
                 rejectUnauthorized: false, // For self-signed certificates
             },
         },
-    })
-    : new Sequelize(
+    });
+} else {
+    sequelize = new Sequelize(
         process.env.DB_NAME,
         process.env.DB_USER,
         process.env.DB_PASSWORD,
@@ -22,8 +25,10 @@ const sequelize = process.env.DATABASE_URL
             port: process.env.DB_PORT || 5432,
         }
     );
+}
 
 module.exports = sequelize;
+
 
 
 
